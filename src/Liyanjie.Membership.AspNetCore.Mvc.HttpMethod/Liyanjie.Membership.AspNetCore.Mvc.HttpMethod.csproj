@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net451;netstandard1.6;</TargetFrameworks>
+        <Description>HttpMethod AuthorityProvider of Membership</Description>
+        <Authors>liyanjie8712@outlook.com</Authors>
+        <Copyright>© Liyanjie.me</Copyright>
+        <Company>Liyanjie.me</Company>
+        <PackageProjectUrl>https://github.com/liyanjie8712/Membership</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/liyanjie8712/Membership</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <Version>0.0.0</Version>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <FileVersion>0.0.0.0</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net451|AnyCPU'">
+        <DocumentationFile>bin\Release\net451\Liyanjie.Membership.AspNetCore.Mvc.HttpMethod.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.6|AnyCPU'">
+        <DocumentationFile>bin\Release\netstandard1.6\Liyanjie.Membership.AspNetCore.Mvc.HttpMethod.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <Target Name="MovePackage" AfterTargets="Pack">
+        <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="C:\Users\Administrator\Documents\Packages\" />
+    </Target>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj" />
+    </ItemGroup>
+
+</Project>

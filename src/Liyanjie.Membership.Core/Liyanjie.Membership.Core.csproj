@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net45;netstandard1.1;</TargetFrameworks>
+        <Description>Membership Core</Description>
+        <Authors>liyanjie8712@outlook.com</Authors>
+        <Copyright>© Liyanjie.me</Copyright>
+        <Company>Liyanjie.me</Company>
+        <PackageProjectUrl>https://github.com/liyanjie8712/Membership</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/liyanjie8712/Membership</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <Version>0.0.0</Version>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <FileVersion>0.0.0.0</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+        <DocumentationFile>bin\Release\net45\Liyanjie.Membership.Core.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.1|AnyCPU'">
+        <DocumentationFile>bin\Release\netstandard1.1\Liyanjie.Membership.Core.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <Target Name="MovePackage" AfterTargets="Pack">
+        <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="C:\Users\Administrator\Documents\Packages\" />
+    </Target>
+
+</Project>

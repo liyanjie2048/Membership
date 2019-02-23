@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net45</TargetFrameworks>
+        <Description>HttpMethod AuthorityProvider of Membership</Description>
+        <Authors>liyanjie8712@outlook.com</Authors>
+        <Copyright>© Liyanjie.me</Copyright>
+        <Company>Liyanjie.me</Company>
+        <PackageProjectUrl>https://github.com/liyanjie8712/Membership</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/liyanjie8712/Membership</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <Version>0.0.0</Version>
+        <AssemblyVersion>0.0.0.0</AssemblyVersion>
+        <FileVersion>0.0.0.0</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>bin\Release\net45\Liyanjie.Membership.AspNet.WebApi.HttpMethod.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj" />
+    </ItemGroup>
+
+    <Target Name="MovePackage" AfterTargets="Pack">
+        <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="C:\Users\Administrator\Documents\Packages\" />
+    </Target>
+
+</Project>

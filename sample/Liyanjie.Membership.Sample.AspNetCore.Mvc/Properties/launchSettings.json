@@ -1,0 +1,17 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:6885/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Liyanjie.Membership.Sample.AspNetCore.Mvc": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:6885/"
+    }
+  }
+}
