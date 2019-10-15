@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Liyanjie.Membership.Sample.AspNet_Mvc_WebApi_")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("d2323f9d-57d7-41f5-8d49-3d05fe6cafd9")]
+[assembly: Guid("b7bf77fe-1cc4-46c4-b59d-456330bd6487")]
 
 // 程序集的版本信息由下列四个值组成:
 //

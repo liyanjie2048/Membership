@@ -25,22 +25,13 @@
         /// </summary>
         public string Delete { get; set; } = nameof(Delete);
 
-        internal string GetValue(string method)
+        internal string GetValue(string method) => method switch
         {
-            switch (method)
-            {
-                case "GET":
-                    return Get;
-                case "POST":
-                    return Post;
-                case "PUT":
-                case "PATCH":
-                    return Put;
-                case "DELETE":
-                    return Delete;
-                default:
-                    return string.Empty;
-            }
-        }
+            "GET" => Get,
+            "POST" => Post,
+            "PUT" => Put,
+            "DELETE" => Delete,
+            _ => string.Empty,
+        };
     }
 }

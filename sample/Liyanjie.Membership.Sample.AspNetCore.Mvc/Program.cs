@@ -12,7 +12,6 @@ namespace Liyanjie.Membership.Sample.AspNetCore.Mvc
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .Build();
 
             host.Run();
