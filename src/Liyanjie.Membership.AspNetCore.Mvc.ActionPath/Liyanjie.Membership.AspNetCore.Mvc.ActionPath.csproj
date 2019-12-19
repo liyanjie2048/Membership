@@ -22,7 +22,7 @@
     </Target>
 
     <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
         <ProjectReference Include="..\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj" />
     </ItemGroup>
 
