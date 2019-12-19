@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Liyanjie.Membership.Core;
+
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.Extensions.Options;
+
+#if NETSTANDARD2_0
+using HttpMethodActionConstraint = Microsoft.AspNetCore.Mvc.Internal.HttpMethodActionConstraint;
+#endif
+#if NETCOREAPP3_0
+using HttpMethodActionConstraint = Microsoft.AspNetCore.Mvc.ActionConstraints.HttpMethodActionConstraint;
+#endif
 
 namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
 {
@@ -21,7 +29,8 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
         /// </summary>
         /// <param name="actionDescriptorCollectionProvider"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider, IOptions<AuthorityOptions<AuthorityProvider>> options)
+        public AuthorityProvider(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
+            IOptions<AuthorityOptions<AuthorityProvider>> options)
         {
             this.actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             this.options = options?.Value;

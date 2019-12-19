@@ -2,7 +2,7 @@
 using Liyanjie.Membership.AspNetCore.Mvc.ActionPath;
 using Liyanjie.Membership.Core;
 
-namespace Liyanjie.Membership.Sample.AspNetCore.Mvc
+namespace Liyanjie.Membership.Sample.AspNetCore_2_1
 {
     public class ActionPathMembership : Membership<AuthorityProvider>
     {

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net45;netstandard1.1;</TargetFrameworks>
+        <TargetFrameworks>net45;netstandard2.0;</TargetFrameworks>
         <Description>Membership Core</Description>
         <Authors>liyanjie8712@outlook.com</Authors>
         <Copyright>© Liyanjie.me</Copyright>
@@ -11,12 +11,8 @@
         <RepositoryType>Git</RepositoryType>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
-        <DocumentationFile>bin\Release\net45\Liyanjie.Membership.Core.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.1|AnyCPU'">
-        <DocumentationFile>bin\Release\netstandard1.1\Liyanjie.Membership.Core.xml</DocumentationFile>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DocumentationFile>bin\Release\Liyanjie.Membership.Core.xml</DocumentationFile>
     </PropertyGroup>
 
     <Target Name="MovePackage" AfterTargets="Pack">

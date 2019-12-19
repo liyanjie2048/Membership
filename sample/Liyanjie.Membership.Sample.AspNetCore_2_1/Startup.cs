@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Liyanjie.Membership.Sample.AspNetCore.Mvc
+namespace Liyanjie.Membership.Sample.AspNetCore_2_1
 {
     public class Startup
     {

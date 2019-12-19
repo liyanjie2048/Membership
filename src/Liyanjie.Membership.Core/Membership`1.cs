@@ -5,7 +5,8 @@ namespace Liyanjie.Membership.Core
     /// <summary>
     /// 
     /// </summary>
-    public abstract class Membership<TAuthorityProvider> : IMembership<TAuthorityProvider> where TAuthorityProvider : IAuthorityProvider
+    public abstract class Membership<TAuthorityProvider>
+        where TAuthorityProvider : IAuthorityProvider
     {
         readonly IAuthorityProvider authorityProvider;
 

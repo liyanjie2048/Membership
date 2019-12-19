@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Liyanjie.Membership.Sample.AspNetCore.Mvc
+namespace Liyanjie.Membership.Sample.AspNetCore_2_1
 {
     public class Program
     {

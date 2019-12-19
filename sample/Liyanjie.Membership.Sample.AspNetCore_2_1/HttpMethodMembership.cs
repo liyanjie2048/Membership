@@ -2,7 +2,7 @@
 using Liyanjie.Membership.AspNetCore.Mvc.HttpMethod;
 using Liyanjie.Membership.Core;
 
-namespace Liyanjie.Membership.Sample.AspNetCore.Mvc
+namespace Liyanjie.Membership.Sample.AspNetCore_2_1
 {
     public class HttpMethodMembership : Membership<AuthorityProvider>
     {

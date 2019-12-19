@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Liyanjie.Membership.Sample.AspNetCore.Mvc": {
+    "Liyanjie.Membership.Sample.AspNetCore_2_1": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "http://localhost:6885/"

@@ -14,7 +14,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
     /// <summary>
     /// 
     /// </summary>
-    public abstract class AuthorityCheckAttribute : FilterAttribute, IAuthorizationFilter
+    public abstract class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
     {
         /// <summary>
         /// 

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
-        <RootNamespace>Liyanjie.Membership.Sample.AspNetCore.Mvc</RootNamespace>
+        <RootNamespace>Liyanjie.Membership.Sample.AspNetCore_2_1</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>

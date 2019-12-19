@@ -3,7 +3,7 @@ using Liyanjie.Membership.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Liyanjie.Membership.Sample.AspNetCore.Mvc.Controllers
+namespace Liyanjie.Membership.Sample.AspNetCore_2_1.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller

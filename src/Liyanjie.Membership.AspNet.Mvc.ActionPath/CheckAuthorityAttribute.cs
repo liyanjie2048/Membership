@@ -8,7 +8,7 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
     /// <summary>
     /// 
     /// </summary>
-    public abstract class AuthorityCheckAttribute : FilterAttribute, IAuthorizationFilter
+    public abstract class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
     {
         /// <summary>
         /// 
