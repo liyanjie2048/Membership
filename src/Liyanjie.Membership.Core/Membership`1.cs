@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace Liyanjie.Membership.Core
 {
@@ -32,7 +33,7 @@ namespace Liyanjie.Membership.Core
         /// </summary>
         /// <param name="authorization"></param>
         /// <returns></returns>
-        public abstract bool IsSuperUser(IAuthorizationContext authorization);
+        public abstract bool IsSuperUser(IPrincipal user);
 
         /// <summary>
         /// 
@@ -41,7 +42,7 @@ namespace Liyanjie.Membership.Core
         /// <param name="resource"></param>
         /// <param name="resources"></param>
         /// <returns></returns>
-        public abstract bool AuthorizedAll(IAuthorizationContext authorization, string resource, params string[] resources);
+        public abstract bool AuthorizedAll(IPrincipal user, string resource, params string[] resources);
 
         /// <summary>
         /// 
@@ -50,6 +51,6 @@ namespace Liyanjie.Membership.Core
         /// <param name="resource"></param>
         /// <param name="resources"></param>
         /// <returns></returns>
-        public abstract bool AuthorizedAny(IAuthorizationContext authorization, string resource, params string[] resources);
+        public abstract bool AuthorizedAny(IPrincipal user, string resource, params string[] resources);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+
 using Liyanjie.Membership.Core;
 
 namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
@@ -12,6 +13,9 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
     /// </summary>
     public class AuthorityProvider : IAuthorityProvider
     {
+        readonly IApiExplorer apiExplorer;
+        readonly AuthorityOptions<AuthorityProvider> options;
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,9 +26,6 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
             this.apiExplorer = apiExplorer;
             this.options = options;
         }
-
-        readonly IApiExplorer apiExplorer;
-        readonly AuthorityOptions<AuthorityProvider> options;
 
         /// <summary>
         /// 
@@ -39,7 +40,8 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
                 apiDescriptions = apiDescriptions.Where(_ => options.Filter(_)).ToList();
             foreach (var item in apiDescriptions)
             {
-                if (item.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any() || item.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any())
+                if (item.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>(true).Any()
+                    || item.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>(true).Any())
                     continue;
 
                 var controller = item.ActionDescriptor.ControllerDescriptor.ControllerType.FullName;

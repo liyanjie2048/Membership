@@ -34,7 +34,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
                 return;
 
             var membership = context.HttpContext.RequestServices.GetRequiredService<Membership<AuthorityProvider>>();
-            if (membership.IsSuperUser(new AuthorizationContext(context.HttpContext)))
+            if (membership.IsSuperUser(context.HttpContext.User))
                 return;
 
             if (!context.HttpContext.User.Identity.IsAuthenticated)
@@ -51,7 +51,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
                   .Select(_ => _.StartsWith("Controllers.") ? resource.Remove(resource.IndexOf("Controllers.")) + _ : _.StartsWith(".") ? resource.Remove(resource.LastIndexOf(".")) + _ : null)
                   .Where(_ => _ != null)
                   .ToArray();
-            if (!membership.AuthorizedAny(new AuthorizationContext(context.HttpContext), resource, resources))
+            if (!membership.AuthorizedAny(context.HttpContext.User, resource, resources))
             {
                 context.Result = new ForbidResult();
                 return;

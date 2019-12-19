@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+
 using Liyanjie.Membership.Core;
 
 namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
@@ -12,6 +13,9 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
     /// </summary>
     public class AuthorityProvider : IAuthorityProvider
     {
+        readonly string[] assemblies;
+        readonly AuthorityOptions<AuthorityProvider, Type> options;
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,9 +26,6 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
             this.assemblies = assemblies ?? new string[0];
             this.options = options;
         }
-
-        readonly string[] assemblies;
-        readonly AuthorityOptions<AuthorityProvider, Type> options;
 
         /// <summary>
         /// 

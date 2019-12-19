@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+
 using Liyanjie.Membership.Core;
 
 namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
@@ -13,19 +14,22 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
         /// <summary>
         /// 
         /// </summary>
-        protected abstract IMembership<AuthorityProvider> Membership { get; }
+        protected abstract Membership<AuthorityProvider> Membership { get; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="filterContext"></param>
-        public virtual void OnAuthorization(System.Web.Mvc.AuthorizationContext filterContext)
+        public virtual void OnAuthorization(AuthorizationContext filterContext)
         {
             var actionDescriptor = filterContext.ActionDescriptor;
-            if (actionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any() || actionDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any())
+
+            var type_AllowAnonymousAttribute = typeof(AllowAnonymousAttribute);
+            if (actionDescriptor.ControllerDescriptor.IsDefined(type_AllowAnonymousAttribute, true)
+                || actionDescriptor.IsDefined(type_AllowAnonymousAttribute, true))
                 return;
 
-            if (Membership.IsSuperUser(new AuthorizationContext(filterContext.HttpContext)))
+            if (Membership.IsSuperUser(filterContext.HttpContext.User))
                 return;
 
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
@@ -41,7 +45,7 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
                   .Where(_ => _ != null)
                   .ToArray();
 
-            if (!Membership.AuthorizedAny(new AuthorizationContext(filterContext.HttpContext), resource, resources))
+            if (!Membership.AuthorizedAny(filterContext.HttpContext.User, resource, resources))
             {
                 filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 return;

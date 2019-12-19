@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Liyanjie.Membership.Core;
+
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -15,19 +17,21 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
     /// </summary>
     public class AuthorityProvider : IAuthorityProvider
     {
+        readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
+        readonly AuthorityOptions<AuthorityProvider, ActionDescriptor> options;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="actionDescriptorCollectionProvider"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider, IOptions<AuthorityOptions<AuthorityProvider, ActionDescriptor>> options)
+        public AuthorityProvider(
+            IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
+            IOptions<AuthorityOptions<AuthorityProvider, ActionDescriptor>> options)
         {
             this.actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
-            this.options = options?.Value;
+            this.options = options.Value;
         }
-
-        readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
-        readonly AuthorityOptions<AuthorityProvider, ActionDescriptor> options;
 
         /// <summary>
         /// 
@@ -38,7 +42,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
             var authorities = new List<Authority>();
             var type_AllowAnonymousFilter = typeof(AllowAnonymousFilter);
             var actionDescriptors = actionDescriptorCollectionProvider.ActionDescriptors.Items.ToList();
-            if (options?.Filter != null)
+            if (options.Filter != null)
                 actionDescriptors = actionDescriptors.Where(_ => options.Filter(_)).ToList();
             foreach (var item in actionDescriptors)
             {

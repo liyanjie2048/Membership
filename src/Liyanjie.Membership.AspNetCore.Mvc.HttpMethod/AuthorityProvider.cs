@@ -24,6 +24,9 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
     /// </summary>
     public class AuthorityProvider : IAuthorityProvider
     {
+        readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
+        readonly AuthorityOptions<AuthorityProvider> options;
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,11 +36,8 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
             IOptions<AuthorityOptions<AuthorityProvider>> options)
         {
             this.actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
-            this.options = options?.Value;
+            this.options = options.Value;
         }
-
-        readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
-        readonly AuthorityOptions<AuthorityProvider> options;
 
         /// <summary>
         /// 
@@ -49,7 +49,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
             var type_AllowAnonymousFilter = typeof(AllowAnonymousFilter);
             var type_HttpMethodActionConstraint = typeof(HttpMethodActionConstraint);
             var actionDescriptors = actionDescriptorCollectionProvider.ActionDescriptors.Items.ToList();
-            if (options?.Filter != null)
+            if (options.Filter != null)
                 actionDescriptors = actionDescriptors.Where(_ => options.Filter(_)).ToList();
             foreach (var item in actionDescriptors)
             {

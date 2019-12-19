@@ -41,7 +41,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
                 return;
 
             var membership = context.HttpContext.RequestServices.GetRequiredService<Membership<AuthorityProvider>>();
-            if (membership.IsSuperUser(new AuthorizationContext(context.HttpContext)))
+            if (membership.IsSuperUser(context.HttpContext.User))
                 return;
 
             if (!context.HttpContext.User.Identity.IsAuthenticated)
@@ -53,8 +53,8 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
             var method = context.HttpContext.Request.Method;
             if ("PATCH".Equals(method, StringComparison.OrdinalIgnoreCase))
                 method = "PUT";
-            var resource = $"{method}:{(context.ActionDescriptor as ControllerActionDescriptor).ControllerTypeInfo.FullName}".ToUpper();
-            if (!membership.AuthorizedAny(new AuthorizationContext(context.HttpContext), resource))
+            var resource = $"{method}:{(context.ActionDescriptor as ControllerActionDescriptor).ControllerTypeInfo.FullName}";
+            if (!membership.AuthorizedAny(context.HttpContext.User, resource))
             {
                 context.Result = new ForbidResult();
                 return;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+
 using Liyanjie.Membership.Core;
 
 namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
@@ -19,7 +20,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
         /// <summary>
         /// 
         /// </summary>
-        protected abstract IMembership<AuthorityProvider> Membership { get; }
+        protected abstract Membership<AuthorityProvider> Membership { get; }
 
         /// <summary>
         /// 
@@ -30,13 +31,19 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
         /// <returns></returns>
         public virtual async Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
-            if (actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any() || actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any())
+            if (actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>(true).Any()
+                || actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>(true).Any())
                 return await continuation();
 
-            if (actionContext.Request.Method.Method == "HEAD" || actionContext.Request.Method.Method == "OPTIONS")
+            if (actionContext.Request.Method.Method switch
+            {
+                "HEAD" => true,
+                "OPTIONS" => true,
+                _ => false
+            })
                 return await continuation();
 
-            if (Membership.IsSuperUser(new AuthorizationContext(actionContext)))
+            if (Membership.IsSuperUser(actionContext.RequestContext.Principal))
                 return await continuation();
 
             if (!actionContext.RequestContext.Principal.Identity.IsAuthenticated)
@@ -46,7 +53,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
             if ("PATCH".Equals(method, StringComparison.OrdinalIgnoreCase))
                 method = "PUT";
             var resource = $"{method}:{actionContext.ActionDescriptor.ControllerDescriptor.ControllerType.FullName}";
-            if (Membership.AuthorizedAny(new AuthorizationContext(actionContext), resource))
+            if (Membership.AuthorizedAny(actionContext.RequestContext.Principal, resource))
                 return await continuation();
 
             return actionContext.Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Forbidden!");
