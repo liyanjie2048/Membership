@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -9,7 +10,8 @@ namespace Liyanjie.Membership.Sample.AspNetCore_2_1.Controllers
     public class ValuesController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<string> List([FromServices]IActionDescriptorCollectionProvider actionDescriptor)
+        public IEnumerable<string> List(
+            [FromServices] IActionDescriptorCollectionProvider actionDescriptor)
         {
             foreach (var item in actionDescriptor.ActionDescriptors.Items)
             {
@@ -27,17 +29,17 @@ namespace Liyanjie.Membership.Sample.AspNetCore_2_1.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]string value)
+        public void Create([FromBody] string value)
         {
         }
 
         [HttpPut("{id}")]
-        public void Modify(int id, [FromBody]string value)
+        public void Modify(int id, [FromBody] string value)
         {
         }
 
         [HttpPatch("{id}")]
-        public void ModifyXXXX(int id, [FromBody]string value)
+        public void ModifyXXXX(int id, [FromBody] string value)
         {
         }
 

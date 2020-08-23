@@ -31,14 +31,14 @@ namespace Liyanjie.Membership.Core
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="authorization"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         public abstract bool IsSuperUser(IPrincipal user);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="authorization"></param>
+        /// <param name="user"></param>
         /// <param name="resource"></param>
         /// <param name="resources"></param>
         /// <returns></returns>
@@ -47,7 +47,7 @@ namespace Liyanjie.Membership.Core
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="authorization"></param>
+        /// <param name="user"></param>
         /// <param name="resource"></param>
         /// <param name="resources"></param>
         /// <returns></returns>
