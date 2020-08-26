@@ -6,8 +6,8 @@
         <IsPackable>True</IsPackable>
         <Description>HttpMethod AuthorityProvider of Membership</Description>
         <Authors>liyanjie8712@outlook.com</Authors>
-        <Copyright>© Liyanjie.me</Copyright>
-        <Company>Liyanjie.me</Company>
+        <Copyright>© Liyanjie.net</Copyright>
+        <Company>Liyanjie.net</Company>
         <PackageProjectUrl>https://github.com/liyanjie8712/Membership</PackageProjectUrl>
         <RepositoryUrl>https://github.com/liyanjie8712/Membership</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
