@@ -5,17 +5,11 @@ using System.Reflection;
 
 using Liyanjie.Membership.Core;
 
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
-
-#if NETSTANDARD2_0
-using HttpMethodActionConstraint = Microsoft.AspNetCore.Mvc.Internal.HttpMethodActionConstraint;
-#endif
-#if NETCOREAPP3_0
-using HttpMethodActionConstraint = Microsoft.AspNetCore.Mvc.ActionConstraints.HttpMethodActionConstraint;
-#endif
 
 namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
 {

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Liyanjie.Membership.AspNetCore.Mvc.ActionPath\Liyanjie.Membership.AspNetCore.Mvc.ActionPath.csproj" />
+    <ProjectReference Include="..\..\src\Liyanjie.Membership.AspNetCore.Mvc.HttpMethod\Liyanjie.Membership.AspNetCore.Mvc.HttpMethod.csproj" />
+  </ItemGroup>
+
+</Project>

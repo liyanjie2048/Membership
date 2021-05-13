@@ -16,13 +16,13 @@
     </PropertyGroup>
 
     <Target Name="MovePackage" AfterTargets="Pack">
-        <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\_NugetPackages\" />
+        <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="C:\_NugetPackages\" />
     </Target>
 
-    <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-        <Reference Include="System.Web" />
-        <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
         <ProjectReference Include="..\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj" />
+        <Reference Include="System.Web" />
     </ItemGroup>
 
 </Project>
