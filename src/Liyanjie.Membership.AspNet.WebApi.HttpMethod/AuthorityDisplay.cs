@@ -1,4 +1,4 @@
-﻿namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
+﻿namespace Liyanjie.Membership
 {
     /// <summary>
     /// 

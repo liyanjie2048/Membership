@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Liyanjie.Membership.Core
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 定义权限组

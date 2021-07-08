@@ -1,4 +1,4 @@
-﻿namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
+﻿namespace Liyanjie.Membership
 {
     /// <summary>
     /// 

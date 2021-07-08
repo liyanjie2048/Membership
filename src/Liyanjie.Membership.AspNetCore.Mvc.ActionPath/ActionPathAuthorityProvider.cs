@@ -2,32 +2,30 @@
 using System.Linq;
 using System.Reflection;
 
-using Liyanjie.Membership.Core;
-
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public class AuthorityProvider : IAuthorityProvider
+    public class ActionPathAuthorityProvider : IAuthorityProvider
     {
         readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
-        readonly AuthorityOptions<AuthorityProvider, ActionDescriptor> options;
+        readonly ActionPathAuthorityOptions options;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="actionDescriptorCollectionProvider"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(
+        public ActionPathAuthorityProvider(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
-            IOptions<AuthorityOptions<AuthorityProvider, ActionDescriptor>> options)
+            IOptions<ActionPathAuthorityOptions> options)
         {
             this.actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             this.options = options.Value;
@@ -37,13 +35,15 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<IAuthority> GetAuthorities()
+        public virtual IEnumerable<Authority> GetAuthorities()
         {
             var authorities = new List<Authority>();
             var type_AllowAnonymousFilter = typeof(AllowAnonymousFilter);
-            var actionDescriptors = actionDescriptorCollectionProvider.ActionDescriptors.Items.ToList();
+            var actionDescriptors = actionDescriptorCollectionProvider.ActionDescriptors.Items;
             if (options.Filter != null)
-                actionDescriptors = actionDescriptors.Where(_ => options.Filter(_)).ToList();
+                actionDescriptors = actionDescriptors
+                    .Where(_ => options.Filter(_))
+                    .ToList();
             foreach (var item in actionDescriptors)
             {
                 var allowAnonymous = item.FilterDescriptors?.Any(_ => _.Filter.GetType() == type_AllowAnonymousFilter) ?? false;

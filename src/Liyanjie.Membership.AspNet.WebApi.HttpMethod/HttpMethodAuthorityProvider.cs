@@ -4,24 +4,24 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-using Liyanjie.Membership.Core;
-
-namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public class AuthorityProvider : IAuthorityProvider
+    public class HttpMethodAuthorityProvider : IAuthorityProvider
     {
         readonly IApiExplorer apiExplorer;
-        readonly AuthorityOptions<AuthorityProvider> options;
+        readonly HttpMethodAuthorityOptions options;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="apiExplorer"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(IApiExplorer apiExplorer, AuthorityOptions<AuthorityProvider> options)
+        public HttpMethodAuthorityProvider(
+            IApiExplorer apiExplorer, 
+            HttpMethodAuthorityOptions options)
         {
             this.apiExplorer = apiExplorer;
             this.options = options;
@@ -31,7 +31,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<IAuthority> GetAuthorities()
+        public virtual IEnumerable<Authority> GetAuthorities()
         {
             var authorities = new List<Authority>();
 

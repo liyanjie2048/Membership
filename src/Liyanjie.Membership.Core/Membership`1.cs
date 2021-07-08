@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Principal;
 
-namespace Liyanjie.Membership.Core
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
@@ -23,7 +23,7 @@ namespace Liyanjie.Membership.Core
         /// <summary>
         /// 
         /// </summary>
-        public virtual IEnumerable<IAuthority> GetAuthorities()
+        public virtual IEnumerable<Authority> GetAuthorities()
         {
             return authorityProvider.GetAuthorities();
         }

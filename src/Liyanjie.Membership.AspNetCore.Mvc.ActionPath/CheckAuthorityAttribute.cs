@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Reflection;
 
-using Liyanjie.Membership.Core;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -11,11 +9,12 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class CheckAuthorityAttribute : Attribute, IAuthorizationFilter
     {
         /// <summary>
@@ -24,16 +23,15 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
         /// <param name="context"></param>
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {
-#if NETCOREAPP3_0
             var type_IAllowAnonymous = typeof(IAllowAnonymous);
             if (context.ActionDescriptor.EndpointMetadata.Any(_ => type_IAllowAnonymous.IsAssignableFrom(_.GetType())))
                 return;
-#endif
+
             var type_AllowAnonymousFilter = typeof(AllowAnonymousFilter);
             if (context.ActionDescriptor.FilterDescriptors.Any(_ => _.Filter.GetType() == type_AllowAnonymousFilter))
                 return;
 
-            var membership = context.HttpContext.RequestServices.GetRequiredService<Membership<AuthorityProvider>>();
+            var membership = context.HttpContext.RequestServices.GetRequiredService<Membership<ActionPathAuthorityProvider>>();
             if (membership.IsSuperUser(context.HttpContext.User))
                 return;
 

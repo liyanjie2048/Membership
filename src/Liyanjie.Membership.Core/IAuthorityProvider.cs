@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Liyanjie.Membership.Core
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
@@ -11,6 +11,6 @@ namespace Liyanjie.Membership.Core
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IAuthority> GetAuthorities();
+        IEnumerable<Authority> GetAuthorities();
     }
 }

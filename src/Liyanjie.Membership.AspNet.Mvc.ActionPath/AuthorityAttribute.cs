@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 

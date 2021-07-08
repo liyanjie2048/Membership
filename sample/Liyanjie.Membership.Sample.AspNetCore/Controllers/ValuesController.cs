@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace Liyanjie.Membership.Sample.AspNetCore_2_1.Controllers
+namespace Liyanjie.Membership.Sample.AspNetCore.Controllers
 {
+    [AuthorityGroup("Values")]
     [Route("api/[controller]")]
+    [ApiController]
+    
     public class ValuesController : ControllerBase
     {
         [HttpGet]

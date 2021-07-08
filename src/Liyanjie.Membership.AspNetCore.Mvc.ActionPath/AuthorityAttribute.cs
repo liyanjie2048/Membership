@@ -1,12 +1,14 @@
 ﻿using System;
 
-namespace Liyanjie.Membership.AspNetCore.Mvc.ActionPath
+using Microsoft.AspNetCore.Mvc.Filters;
+
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    public class AuthorityAttribute : Attribute
+    public class AuthorityAttribute : Attribute, IFilterMetadata
     {
         /// <summary>
         /// 定义权限

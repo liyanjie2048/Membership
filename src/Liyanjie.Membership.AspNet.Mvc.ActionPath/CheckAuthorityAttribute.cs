@@ -1,20 +1,26 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
-using Liyanjie.Membership.Core;
-
-namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    public class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
     {
+        readonly Membership<ActionPathAuthorityProvider> membership;
+
         /// <summary>
         /// 
         /// </summary>
-        protected abstract Membership<AuthorityProvider> Membership { get; }
+        /// <param name="membership"></param>
+        public CheckAuthorityAttribute(Membership<ActionPathAuthorityProvider> membership)
+        {
+            this.membership = membership;
+        }
 
         /// <summary>
         /// 
@@ -29,7 +35,7 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
                 || actionDescriptor.IsDefined(type_AllowAnonymousAttribute, true))
                 return;
 
-            if (Membership.IsSuperUser(filterContext.HttpContext.User))
+            if (membership.IsSuperUser(filterContext.HttpContext.User))
                 return;
 
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
@@ -45,7 +51,7 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
                   .Where(_ => _ != null)
                   .ToArray();
 
-            if (!Membership.AuthorizedAny(filterContext.HttpContext.User, resource, resources))
+            if (!membership.AuthorizedAny(filterContext.HttpContext.User, resource, resources))
             {
                 filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 return;

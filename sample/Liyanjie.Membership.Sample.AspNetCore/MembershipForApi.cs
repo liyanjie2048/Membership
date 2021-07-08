@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Security.Principal;
 
-using Liyanjie.Membership.AspNet.Mvc.ActionPath;
-using Liyanjie.Membership.Core;
-
-namespace Liyanjie.Membership.Sample.AspNet
+namespace Liyanjie.Membership.Sample.AspNetCore
 {
-    public class ActionPathMembership : Membership<AuthorityProvider>
+    public class MembershipForApi : Membership<HttpMethodAuthorityProvider>
     {
-        public ActionPathMembership(AuthorityProvider authorityProvider)
-            : base(authorityProvider)
-        { }
+        public MembershipForApi(HttpMethodAuthorityProvider provider)
+            : base(provider) { }
 
         public override bool AuthorizedAll(IPrincipal user, string resource, params string[] resources)
         {

@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-using Liyanjie.Membership.Core;
-
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public class AuthorityProvider : IAuthorityProvider
+    public class HttpMethodAuthorityProvider : IAuthorityProvider
     {
         readonly IActionDescriptorCollectionProvider actionDescriptorCollectionProvider;
-        readonly AuthorityOptions<AuthorityProvider> options;
+        readonly HttpMethodAuthorityOptions options;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="actionDescriptorCollectionProvider"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
-            IOptions<AuthorityOptions<AuthorityProvider>> options)
+        public HttpMethodAuthorityProvider(
+            IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
+            IOptions<HttpMethodAuthorityOptions> options)
         {
             this.actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
             this.options = options.Value;
@@ -37,7 +36,7 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<IAuthority> GetAuthorities()
+        public virtual IEnumerable<Authority> GetAuthorities()
         {
             var authorities = new List<Authority>();
             var type_AllowAnonymousFilter = typeof(AllowAnonymousFilter);
@@ -82,15 +81,11 @@ namespace Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
 
         static string[] Dependences(string method)
         {
-            switch (method)
+            return method switch
             {
-                case "POST":
-                case "PUT":
-                case "DELETE":
-                    return new[] { "GET" };
-                default:
-                    return null;
-            }
+                "POST" or "PUT" or "DELETE" => new[] { "GET" },
+                _ => null,
+            };
         }
     }
 }

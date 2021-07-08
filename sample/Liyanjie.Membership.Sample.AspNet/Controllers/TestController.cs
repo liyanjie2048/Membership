@@ -1,11 +1,8 @@
 ﻿using System.Web.Mvc;
-using Liyanjie.Membership.AspNet.Mvc.ActionPath;
-using Liyanjie.Membership.Core;
 
 namespace Liyanjie.Membership.Sample.AspNet.Controllers
 {
-    [ActionPathAuthority]
-    [AuthorityGroup("测试")]
+    [AuthorityGroup("Test")]
     public class TestController : Controller
     {
         [Authority("列出")]
@@ -26,7 +23,7 @@ namespace Liyanjie.Membership.Sample.AspNet.Controllers
             return View();
         }
 
-        [Authority("修改", ".List,.Detail")]
+        [Authority("修改", ".List", ".Detail")]
         public ActionResult Modify()
         {
             return View();

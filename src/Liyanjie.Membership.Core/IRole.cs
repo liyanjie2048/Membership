@@ -1,4 +1,4 @@
-﻿namespace Liyanjie.Membership.Core
+﻿namespace Liyanjie.Membership
 {
     /// <summary>
     /// 

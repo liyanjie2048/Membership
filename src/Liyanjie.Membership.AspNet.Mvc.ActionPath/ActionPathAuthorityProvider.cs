@@ -4,24 +4,24 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
-using Liyanjie.Membership.Core;
-
-namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public class AuthorityProvider : IAuthorityProvider
+    public class ActionPathAuthorityProvider : IAuthorityProvider
     {
         readonly string[] assemblies;
-        readonly AuthorityOptions<AuthorityProvider, Type> options;
+        readonly ActionPathAuthorityOptions options;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="assemblies"></param>
         /// <param name="options"></param>
-        public AuthorityProvider(string[] assemblies, AuthorityOptions<AuthorityProvider, Type> options)
+        public ActionPathAuthorityProvider(
+            string[] assemblies,
+            ActionPathAuthorityOptions options)
         {
             this.assemblies = assemblies ?? new string[0];
             this.options = options;
@@ -31,14 +31,12 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<IAuthority> GetAuthorities()
+        public virtual IEnumerable<Authority> GetAuthorities()
         {
             var authorities = new List<Authority>();
             foreach (var assembly in assemblies.Select(_ => Assembly.Load(_)))
             {
                 var controllers = assembly.GetExportedTypes().Where(_ => _.IsSubclassOf(typeof(Controller))).ToList();
-                if (options?.Filter != null)
-                    controllers = controllers.Where(_ => options.Filter(_)).ToList();
                 if (controllers.Count == 0)
                     continue;
 
@@ -47,12 +45,16 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
                     if (controller.GetCustomAttributes<AllowAnonymousAttribute>(true).Any())
                         continue;
 
-                    var group = string.Join("\\", controller.GetCustomAttributes<AuthorityGroupAttribute>(true).Reverse().Select(_ => _.GroupName));
+                    var group = string.Join("\\", controller.GetCustomAttributes<AuthorityGroupAttribute>(true)
+                        .Reverse()
+                        .Select(_ => _.GroupName));
 
                     var actions = controller.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
                         .Where(_ => !_.Name.StartsWith("get_", StringComparison.InvariantCultureIgnoreCase) && !_.Name.StartsWith("set_", StringComparison.InvariantCultureIgnoreCase))
                         .Distinct()
                         .ToList();
+                    if (options?.Filter != null)
+                        actions = actions.Where(_ => options.Filter(_)).ToList();
                     if (actions.Count == 0)
                         continue;
 
@@ -71,7 +73,7 @@ namespace Liyanjie.Membership.AspNet.Mvc.ActionPath
 
                         var exists = authorities.FirstOrDefault(_ => _.Resource == resource);
                         if (exists == null)
-                            authorities.Add(new Authority
+                            authorities.Add(new()
                             {
                                 Group = group,
                                 Resource = resource,

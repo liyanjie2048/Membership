@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列特性集
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Liyanjie.Membership.Sample.AspNet_Mvc_WebApi_")]
+[assembly: AssemblyTitle("Liyanjie.Membership.Sample.AspNet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Liyanjie.Membership.Sample.AspNet_Mvc_WebApi_")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyProduct("Liyanjie.Membership.Sample.AspNet")]
+[assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("b7bf77fe-1cc4-46c4-b59d-456330bd6487")]
+[assembly: Guid("6d1259b0-abaa-44fa-be02-62fabef73da7")]
 
 // 程序集的版本信息由下列四个值组成:
 //

@@ -8,19 +8,24 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-using Liyanjie.Membership.Core;
-
-namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
+namespace Liyanjie.Membership
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    public class CheckAuthorityAttribute : FilterAttribute, IAuthorizationFilter
     {
+        readonly Membership<HttpMethodAuthorityProvider> membership;
+
         /// <summary>
         /// 
         /// </summary>
-        protected abstract Membership<AuthorityProvider> Membership { get; }
+        /// <param name="membership"></param>
+        public CheckAuthorityAttribute(Membership<HttpMethodAuthorityProvider> membership)
+        {
+            this.membership = membership;
+        }
 
         /// <summary>
         /// 
@@ -43,7 +48,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
             })
                 return await continuation();
 
-            if (Membership.IsSuperUser(actionContext.RequestContext.Principal))
+            if (membership.IsSuperUser(actionContext.RequestContext.Principal))
                 return await continuation();
 
             if (!actionContext.RequestContext.Principal.Identity.IsAuthenticated)
@@ -53,7 +58,7 @@ namespace Liyanjie.Membership.AspNet.WebApi.HttpMethod
             if ("PATCH".Equals(method, StringComparison.OrdinalIgnoreCase))
                 method = "PUT";
             var resource = $"{method}:{actionContext.ActionDescriptor.ControllerDescriptor.ControllerType.FullName}";
-            if (Membership.AuthorizedAny(actionContext.RequestContext.Principal, resource))
+            if (membership.AuthorizedAny(actionContext.RequestContext.Principal, resource))
                 return await continuation();
 
             return actionContext.Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Forbidden!");
