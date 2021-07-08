@@ -27,12 +27,12 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Liyanjie.Membership.Abstractions\Liyanjie.Membership.Abstractions.csproj" />
+    </ItemGroup>
+
     <Target Name="MovePackage" AfterTargets="Pack">
         <Move SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="C:\_NugetPackages\" />
     </Target>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj" />
-    </ItemGroup>
 
 </Project>

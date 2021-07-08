@@ -142,6 +142,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Liyanjie.Membership.Abstractions\Liyanjie.Membership.Abstractions.csproj">
+      <Project>{6f7d701f-af26-47c8-90fd-38c6d5da698e}</Project>
+      <Name>Liyanjie.Membership.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Liyanjie.Membership.AspNet.Mvc.ActionPath\Liyanjie.Membership.AspNet.Mvc.ActionPath.csproj">
       <Project>{22fc3bf5-5bd9-4d9e-b590-6b36ba25473c}</Project>
       <Name>Liyanjie.Membership.AspNet.Mvc.ActionPath</Name>
@@ -149,10 +153,6 @@
     <ProjectReference Include="..\..\src\Liyanjie.Membership.AspNet.WebApi.HttpMethod\Liyanjie.Membership.AspNet.WebApi.HttpMethod.csproj">
       <Project>{0fd33649-69c9-4ad4-8229-544feef7be5c}</Project>
       <Name>Liyanjie.Membership.AspNet.WebApi.HttpMethod</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Liyanjie.Membership.Core\Liyanjie.Membership.Core.csproj">
-      <Project>{5c487bc0-123f-4c60-944c-5249bb99a8f7}</Project>
-      <Name>Liyanjie.Membership.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
