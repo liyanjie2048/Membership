@@ -2,7 +2,7 @@
 
 用于AspNet.Mvc、AspNet.WebApi和AspNetCore.Mvc的Membership（用户、角色、权限）。
 
-- Liyanjie.Membership.Abstractions
+- #### Liyanjie.Membership.Abstractions
   - Authority
   - AuthorityGroupAttribute
   - AuthorityOptions&lt;TAuthorityProvider, TAuthorityDescriptor&gt;
@@ -11,7 +11,7 @@
   - IUser
   - Membership&lt;TAuthorityProvider&gt;
 
-- Liyanjie.Membership.AspNet.Mvc.ActionPath
+- #### Liyanjie.Membership.AspNet.Mvc.ActionPath
   - Useage
     ```csharp
     //services is IServiceCollection
@@ -20,7 +20,7 @@
         where TMembershipImplementation : Membership<ActionPathAuthorityProvider>
         where TAuthorityProvider : ActionPathAuthorityProvider
     ```
-- Liyanjie.Membership.AspNet.WebApi.HttpMethod
+- #### Liyanjie.Membership.AspNet.WebApi.HttpMethod
   - Useage
     ```csharp
     //services is IServiceCollection
@@ -29,7 +29,7 @@
         where TMembershipImplementation : Membership<HttpMethodAuthorityProvider>
         where TAuthorityProvider : HttpMethodAuthorityProvider
     ```
-- Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
+- #### Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
   - Useage
     ```csharp
     //services is IServiceCollection
@@ -38,7 +38,7 @@
         where TMembershipImplementation : Membership<ActionPathAuthorityProvider>
         where TAuthorityProvider : ActionPathAuthorityProvider
     ```
-- Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
+- #### Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
   - Useage
     ```csharp
     //services is IServiceCollection
