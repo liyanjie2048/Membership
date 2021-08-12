@@ -16,7 +16,6 @@ namespace Liyanjie.Membership.Sample.AspNet
     public class Global : HttpApplication
     {
         readonly IServiceCollection services = new ServiceCollection();
-        IServiceScope scope;
         void Application_Start(object sender, EventArgs e)
         {
             // 在应用程序启动时运行的代码
@@ -41,21 +40,15 @@ namespace Liyanjie.Membership.Sample.AspNet
                 GlobalConfiguration.Configuration.Services.GetApiExplorer(),
                 ActivatorUtilities.GetServiceOrCreateInstance<HttpMethodAuthorityOptions>(serviceProvider)));
 
-            scope = services.BuildServiceProvider().CreateScope();
+            var resolver = new MyDependencyResolver(services.BuildServiceProvider().CreateScope());
 
-            GlobalConfiguration.Configuration.DependencyResolver = new MyDependencyResolver(scope);
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new MyHttpControllerActivator());
+            GlobalConfiguration.Configuration.DependencyResolver = resolver;
+            DependencyResolver.SetResolver(resolver);
 
-            DependencyResolver.SetResolver(new MyDependencyResolver(scope));
-            ControllerBuilder.Current.SetControllerFactory(typeof(MyControllerFactory));
         }
         void Application_EndRequest(object sender, EventArgs e)
         {
             MyDependencyResolver.DisposeServiceScope();
-        }
-        void Application_End(object sender, EventArgs e)
-        {
-            scope?.Dispose();
         }
 
         class MyDependencyResolver : System.Web.Mvc.IDependencyResolver, System.Web.Http.Dependencies.IDependencyResolver
@@ -83,6 +76,11 @@ namespace Liyanjie.Membership.Sample.AspNet
 
             public object GetService(Type serviceType)
             {
+                if (typeof(IController).IsAssignableFrom(serviceType) || typeof(IHttpController).IsAssignableFrom(serviceType))
+                {
+                    return ActivatorUtilities.CreateInstance(ServiceProvider, serviceType);
+                }
+
                 return ServiceProvider.GetService(serviceType);
             }
 
@@ -103,32 +101,6 @@ namespace Liyanjie.Membership.Sample.AspNet
                 {
                     scope.Dispose();
                 }
-            }
-        }
-        class MyHttpControllerActivator : IHttpControllerActivator
-        {
-            public IHttpController Create(
-                HttpRequestMessage request,
-                HttpControllerDescriptor controllerDescriptor,
-                Type controllerType)
-            {
-                var dependencyResolver = GlobalConfiguration.Configuration.DependencyResolver.BeginScope() as MyDependencyResolver;
-                return ActivatorUtilities.GetServiceOrCreateInstance(dependencyResolver.ServiceProvider, controllerType) as IHttpController;
-            }
-        }
-        class MyControllerFactory : DefaultControllerFactory
-        {
-            protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
-            {
-                IController controller = default;
-                if (controllerType is not null)
-                {
-                    var dependencyResolver = DependencyResolver.Current as MyDependencyResolver;
-                    controller = ActivatorUtilities.GetServiceOrCreateInstance(dependencyResolver.ServiceProvider, controllerType) as IController;
-                }
-                if (controller is null)
-                    controller = base.GetControllerInstance(requestContext, controllerType);
-                return controller;
             }
         }
     }
