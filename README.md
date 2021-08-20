@@ -12,7 +12,7 @@
   - Membership&lt;TAuthorityProvider&gt;
 
 - #### Liyanjie.Membership.AspNet.Mvc.ActionPath
-  - Useage
+  - Usage
     ```csharp
     //services is IServiceCollection
     services.AddMembership<TMembershipImplementation, TAuthorityProvider>(
@@ -21,7 +21,7 @@
         where TAuthorityProvider : ActionPathAuthorityProvider
     ```
 - #### Liyanjie.Membership.AspNet.WebApi.HttpMethod
-  - Useage
+  - Usage
     ```csharp
     //services is IServiceCollection
     services.AddMembership<TMembershipImplementation, TAuthorityProvider>(
@@ -30,7 +30,7 @@
         where TAuthorityProvider : HttpMethodAuthorityProvider
     ```
 - #### Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
-  - Useage
+  - Usage
     ```csharp
     //services is IServiceCollection
     services.AddMembership<TMembershipImplementation, TAuthorityProvider>(
@@ -39,7 +39,7 @@
         where TAuthorityProvider : ActionPathAuthorityProvider
     ```
 - #### Liyanjie.Membership.AspNetCore.Mvc.HttpMethod
-  - Useage
+  - Usage
     ```csharp
     //services is IServiceCollection
     services.AddMembership<TMembershipImplementation, TAuthorityProvider>(
